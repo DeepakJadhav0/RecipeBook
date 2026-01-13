@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import main_logo from "../assets/cook_logo.png"
 import { SlNotebook } from "react-icons/sl";
 import { CgSearch } from "react-icons/cg";
-import RecipeCard from './RecipeCard';
 import RecipeCards from './RecipeCards';
 import Contact from './Contact';
 
@@ -10,6 +9,7 @@ import Contact from './Contact';
 export default function Book() {
 
   const [input , setinput] = useState("")
+  const [loading , setLoading] = useState(true)
   const [recipe , setRecipe] = useState([])
 
   function handelChange(e){
@@ -19,6 +19,7 @@ export default function Book() {
   async function fetchData() {
       const data = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${input ? input : "ch"}`)
       const res = await data.json()
+      setLoading(false)
       setRecipe(res.meals ? res.meals.slice(0,8) : [])
   }
 
@@ -46,8 +47,9 @@ export default function Book() {
             <input onChange={handelChange} value={input} name='input' className='p-3 focus:ring-1 pl-14 border-2 border-gray-300 text-2xl w-[500px] focus:outline-none  rounded-l-full rounded-r-full' type="text"/>
         </div> 
         </section>
+        
         {
-          recipe &&  <RecipeCards recipe={recipe}/>
+          recipe &&  <RecipeCards loading={loading} recipe={recipe}/>
         }
        <Contact/>
     </main>

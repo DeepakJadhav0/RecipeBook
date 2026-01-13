@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { SlNotebook } from "react-icons/sl";
 import { CgMail, CgPhone, CgFacebook, CgInstagram } from "react-icons/cg";
+import toast,{ Toaster } from 'react-hot-toast';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -10,13 +11,13 @@ export default function Contact() {
   }
 
   function handleSubmit(e) {
-    e.preventDefault();
-    alert("Message sent! (Demo)");
+    toast.success("Submitted Succefully")
     setFormData({ name: "", email: "", message: "" });
   }
 
   return (
     <main className="flex items-center justify-center min-h-screen bg-[#FFA542] p-4">
+      <Toaster/>
 
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6 flex flex-col gap-4">
 
@@ -34,7 +35,8 @@ export default function Contact() {
           We’d love to hear your feedback, questions, or suggestions!
         </p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} action="https://api.web3forms.com/submit" method="POST" className="flex flex-col gap-3">
+         <input type="hidden" name="access_key" value="ecb877b2-f01a-4a8d-9325-e171e5238f5c"></input>
           <input
             type="text"
             name="name"

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import OverCard from './OverCard'
+import Skeleton from 'react-loading-skeleton'
+import SkeletonCards from './SkeletonCards'
 
-export default function RecipeCards({ recipe }) {
+export default function RecipeCards({ recipe, loading }) {
   const [selectedRecipe, setSelectedRecipe] = useState(null)
 
   function handleOpen(item) {
@@ -10,6 +12,20 @@ export default function RecipeCards({ recipe }) {
 
   function handleClose() {
     setSelectedRecipe(null)
+  }
+
+  if(loading){
+    return(
+      <SkeletonCards/>
+    )
+  }
+
+  if(recipe.length <= 0){
+    return(
+      <div className='h-60 flex justify-center items-center'>
+        <h1 className='text-gray-300 text-2xl font-bold'>No Recipe Found , Check Keyword </h1>
+      </div> 
+    )
   }
 
   return (

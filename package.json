@@ -12,7 +12,9 @@
   "dependencies": {
     "esbuild": "^0.17.19",
     "react": "^19.2.3",
-    "react-dom": "^19.2.3"
+    "react-dom": "^19.2.3",
+    "react-hot-toast": "^2.6.0",
+    "react-loading-skeleton": "^3.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
